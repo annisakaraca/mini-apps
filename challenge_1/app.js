@@ -10,12 +10,13 @@ console.log(board);
 
 // CONTROLLER
 
-var click1a = function() {
+var playMove = function(x,y) {
+  console.log(x,y)
   // update board array
-  board[0][0] = currentPlayer;
+  board[x][y] = currentPlayer;
   console.log(board);
   toggleCurrentPlayer();
-  updateBoardView();
+  updateBoardView(x,y);
 };
 
 var toggleCurrentPlayer = function() {
@@ -28,10 +29,10 @@ var toggleCurrentPlayer = function() {
 
 
 // VIEW
-var updateBoardView = function() {
-  var element = document.getElementById('00');
+var updateBoardView = function(x, y) {
+  var element = document.getElementById('' + x + y);
   element.removeChild(element.childNodes[0]);
-  var node = document.createTextNode(board[0][0]);
+  var node = document.createTextNode(board[x][y]);
   element.appendChild(node);
   console.log(element);
 };
