@@ -6,7 +6,7 @@ var board = [
     [0, 0, 0]
 ];
 var currentPlayer = 'X';
-console.log(board);
+var moveCounter = 0;
 
 // CONTROLLER
 
@@ -14,9 +14,10 @@ var playMove = function(x,y) {
   console.log(x,y)
   // update board array
   board[x][y] = currentPlayer;
-  console.log(board);
   toggleCurrentPlayer();
   updateBoardView(x,y);
+  moveCounter++;
+  checkGameProgress();
 };
 
 var toggleCurrentPlayer = function() {
@@ -26,6 +27,18 @@ var toggleCurrentPlayer = function() {
       currentPlayer = 'X';
   }
 };
+
+var checkGameProgress = function() {
+//   var hasWinner = checkIfWinner();
+  var hasWinner = false;
+  if (hasWinner) {
+    // render message to screen
+  } else if (moveCounter === 9) {
+    // render tie message to screen
+    var msgElement = document.getElementById('progress');
+    msgElement.innerHTML = 'Game over: TIE';
+  }
+}
 
 
 // VIEW
