@@ -69,6 +69,10 @@ var checkIfWinner = function() {
     hasWinner = true;
   }
 
+  if (hasWinner) {
+      disableButtons();
+  }
+
   return hasWinner;
 };
 
@@ -81,3 +85,16 @@ var updateBoardView = function(x, y) {
   element.appendChild(node);
   console.log(element);
 };
+
+var disableButtons = function() {
+  // iterate through board array
+  for (var x = 0; x < 3; x++) {
+    for (var y = 0; y < 3; y++) {
+      if (board[x][y] === 0) {
+        var element = document.getElementById(''+ x + y);
+        element.childNodes[0].setAttribute('disabled', true);
+      }
+    }
+  }
+    // for each position = 0, disable button
+}
