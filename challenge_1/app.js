@@ -98,3 +98,31 @@ var disableButtons = function() {
   }
     // for each position = 0, disable button
 }
+
+var resetBoard = function() {
+  // reset model
+  board = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+  ];
+  // re-render buttons
+  for (var x = 0; x < 3; x++) {
+    for (var y = 0; y < 3; y++) {
+      if (board[x][y] === 0) {
+        var element = document.getElementById(''+ x + y);
+        element.removeChild(element.childNodes[0]);
+        var btnNode = document.createElement("button");
+        btnNode.innerHTML = 'play';
+        btnNode.setAttribute('onclick', 'playMove('+x+','+y+')');
+        element.appendChild(btnNode);
+      }
+    }
+  }
+
+  // re-set current player to X
+  currentPlayer = 'X';
+
+  // re-set move counter
+  moveCounter = 0;
+};
