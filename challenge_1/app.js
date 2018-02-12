@@ -46,19 +46,29 @@ var checkIfWinner = function() {
   var hasWinner = false;
   // check rows
   for (var x = 0; x < 3; x++) {
-    var rowIsPopulated = ((board[x][0] !== 0) && (board[x][1] !== 0) && (board[x][2] !== 0) );
+    var rowIsPopulated = ((board[x][0] !== 0) && (board[x][1] !== 0) && (board[x][2] !== 0));
     if (board[x][0] === board[x][1] && board[x][1] === board[x][2] && rowIsPopulated) {
       hasWinner = true;
     }
   }
   // check columns
   for (var x = 0; x < 3; x++) {
-    var columnIsPopulated = ((board[0][x] !== 0) && (board[1][x] !== 0) && (board[2][x] !== 0) );
-    if (board[0][x] === board[1][x] && board[x][1] === board[2][x] && columnIsPopulated) {
+    var columnIsPopulated = ((board[0][x] !== 0) && (board[1][x] !== 0) && (board[2][x] !== 0));
+    if (board[0][x] === board[1][x] && board[1][x] === board[2][x] && columnIsPopulated) {
       hasWinner = true;
     }
   }
-  // check diagonals
+  // check 00 to 22 diagonal
+  var firstDiagonalIsPopulated = ((board[0][0] !== 0) && (board[1][1] !== 0) && (board[2][2] !== 0));
+  if (board[0][0] === board[1][1] && board[1][1] === board[2][2] && firstDiagonalIsPopulated) {
+    hasWinner = true;
+  }
+  // check 20 to 02 diagonal
+  var secondDiagonalIsPopulated = ((board[2][0] !== 0) && (board[1][1] !== 0) && (board[0][2] !== 0));
+  if (board[2][0] === board[1][1] && board[1][1] === board[0][2] && secondDiagonalIsPopulated) {
+    hasWinner = true;
+  }
+
   return hasWinner;
 };
 
