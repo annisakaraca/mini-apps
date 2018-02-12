@@ -7,6 +7,11 @@ var board = [
 ];
 var currentPlayer = 'X';
 var moveCounter = 0;
+var lastWinner;
+var score = {
+    X: 0,
+    O: 0
+};
 
 // CONTROLLER
 
@@ -26,6 +31,7 @@ var toggleCurrentPlayer = function() {
   } else {
       currentPlayer = 'X';
   }
+  renderCurrentPlayer();
 };
 
 var checkGameProgress = function() {
@@ -35,6 +41,10 @@ var checkGameProgress = function() {
   if (hasWinner) {
     // render message to screen
     msgElement.innerHTML = 'WINNER: ' + currentPlayer;
+    lastWinner = currentPlayer;
+    score[currentPlayer]++;
+    //update score board
+    updateScoreBoard(currentPlayer);
   } else if (moveCounter === 9) {
     // render tie message to screen
     msgElement.innerHTML = 'Game over: TIE';
@@ -121,8 +131,18 @@ var resetBoard = function() {
   }
 
   // re-set current player to X
-  currentPlayer = 'X';
+  currentPlayer = lastWinner;
 
   // re-set move counter
   moveCounter = 0;
+};
+
+var renderCurrentPlayer = function() {
+  var element = document.getElementById('player');
+  element.innerHTML = currentPlayer;
+};
+
+var updateScoreBoard = function(player) {
+    var element = document.getElementById(''+player+'Score');
+    element.innerHTML = player + ': ' + score[player];
 };
