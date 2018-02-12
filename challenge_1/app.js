@@ -42,15 +42,22 @@ var checkGameProgress = function() {
 };
 
 var checkIfWinner = function() {
-
+ 
   var hasWinner = false;
   // check rows
   for (var x = 0; x < 3; x++) {
-    if (board[x][0] === board[x][1] && board[x][1] === board[x][2] && ((board[x][0] !== 0) && (board[x][1] !== 0)) && (board[x][2] !== 0) ) {
+    var rowIsPopulated = ((board[x][0] !== 0) && (board[x][1] !== 0) && (board[x][2] !== 0) );
+    if (board[x][0] === board[x][1] && board[x][1] === board[x][2] && rowIsPopulated) {
       hasWinner = true;
     }
   }
-  // check column
+  // check columns
+  for (var x = 0; x < 3; x++) {
+    var columnIsPopulated = ((board[0][x] !== 0) && (board[1][x] !== 0) && (board[2][x] !== 0) );
+    if (board[0][x] === board[1][x] && board[x][1] === board[2][x] && columnIsPopulated) {
+      hasWinner = true;
+    }
+  }
   // check diagonals
   return hasWinner;
 };
