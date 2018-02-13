@@ -40,20 +40,22 @@ var traverseEmployees = function(node) {
 };
 
 var writeEmployees = function(employeeList) {
-  var output = [
-    ['firstName', 'lastName', 'county', 'city', 'role', 'sales']
-  ];
+  var output = getPropertiesOfList(employeeList[0]);
 
   employeeList.forEach(function(employee) {
     var employeeArray = [];
-    employeeArray.push(employee.firstName);
-    employeeArray.push(employee.lastName);
-    employeeArray.push(employee.county);
-    employeeArray.push(employee.city);
-    employeeArray.push(employee.role);
-    employeeArray.push(employee.sales);
+    output[0].forEach(function(attribute) {
+      employeeArray.push(employee[attribute]);
+    })
 
     output.push(employeeArray);
   });
   return output;
+};
+
+var getPropertiesOfList = function(object) {
+  var starterArray = [Object.keys(object)];
+  var index = starterArray[0].indexOf('children');
+  starterArray[0].splice(index, 1);
+  return starterArray;
 };
