@@ -10,10 +10,16 @@ $(document).ready(function(){
 
 var clickHandler = function(){
   console.log('clicked submit!');
-  var input = $("input").val();
-  // make post request
-  $.post("/", {text: input}, function(data, status) {
-    console.log('data', data);
-  });
+  var input = JSON.parse($("input").val());
+  input = JSON.stringify(input);
+  console.log(typeof input);
+  $.ajax({
+    type: "POST",
+    url: '/',
+    data: input,
+    success: function() {console.log('successful post')},
+    contentType: "application/json",
+    dataType: "json"
+  })
 }
 
