@@ -13,6 +13,8 @@ app.use(myLogger);
 
 app.get('/', (req, res) => res.send('hello'));
 app.post('/', (req,res) => {
+
+  // parse request body
   let body = [];
   req.on('data', (chunk) => {
     console.log('collecting data');
@@ -31,6 +33,8 @@ app.post('/', (req,res) => {
     })
     console.log('body', bodyObj);
   })
+
+  // send response
   res.send('got post')
 });
 

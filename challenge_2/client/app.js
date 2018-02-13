@@ -10,8 +10,9 @@ $(document).ready(function(){
 
 var clickHandler = function(){
   console.log('clicked submit!');
+  var input = $("input").val();
   // make post request
-  $.post("/", {text: 'test post request', hello: 'world'}, function(data, status) {
+  $.post("/", {text: input}, function(data, status) {
     console.log('data', data);
   });
 }
