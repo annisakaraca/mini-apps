@@ -16,22 +16,27 @@ app.use(bodyParser.json({
 
 
 app.post('/', (req,res) => {
-  traverseEmployees(req.body);
-  var flattenedJSON = writeEmployees(allEmployees);
+  var employeeList = traverseEmployees(req.body);
+  var flattenedJSON = writeEmployees(employeeList);
   console.log(flattenedJSON);
   res.send(flattenedJSON);
 })
 
 app.listen(3000, () => console.log('CSV report app listening on port 3000!'));
 
-var allEmployees = [];
+// var allEmployees = [];
 
 var traverseEmployees = function(node) {
-  allEmployees.push(node);
-  var children = node.children;
-  children.forEach(function(child) {
-    traverseEmployees(child);
-  });
+  var allEmployees = [];
+  var recurseOnEmployees = function(node) {
+    allEmployees.push(node);
+    var children = node.children;
+    children.forEach(function(child) {
+      recurseOnEmployees(child);
+    });
+  }
+  recurseOnEmployees(node);
+  return allEmployees;
 };
 
 var writeEmployees = function(employeeList) {
