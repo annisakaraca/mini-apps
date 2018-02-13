@@ -6,19 +6,49 @@ const bodyParser = require('body-parser');
 var myLogger = function (req, res, next) {
   console.log(req.method + ' request receieved');
   next();
-  } ;
+};
 
 app.use(express.static('client'));
 app.use(myLogger);
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  extended: true
+}));
 
 
-app.get('/', (req, res) => res.send('hello'));
 app.post('/', (req,res) => {
-  console.log('body', req.body);
-  // send response
-  res.send('got post')
-});
+  traverseEmployees(req.body);
+  var flattenedJSON = writeEmployees(allEmployees);
+  console.log(flattenedJSON);
+  res.send(flattenedJSON);
+})
 
 app.listen(3000, () => console.log('CSV report app listening on port 3000!'));
 
+var allEmployees = [];
+
+var traverseEmployees = function(node) {
+  allEmployees.push(node);
+  var children = node.children;
+  children.forEach(function(child) {
+    traverseEmployees(child);
+  });
+};
+
+var writeEmployees = function(employeeList) {
+  var output = [
+    ['firstName', 'lastName', 'county', 'city', 'role', 'sales']
+  ];
+
+  employeeList.forEach(function(employee) {
+    var employeeArray = [];
+    employeeArray.push(employee.firstName);
+    employeeArray.push(employee.lastName);
+    employeeArray.push(employee.county);
+    employeeArray.push(employee.city);
+    employeeArray.push(employee.role);
+    employeeArray.push(employee.sales);
+
+    output.push(employeeArray);
+  });
+  return output;
+};
