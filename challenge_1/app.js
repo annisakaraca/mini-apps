@@ -12,8 +12,13 @@ var score = {
     X: 0,
     O: 0
 };
-var playerX;
-var playerO;
+
+var playerName = {
+    X: 'X',
+    O: 'O'
+};
+// var playerX = 'X';
+// var playerO = 'O';
 
 // CONTROLLER
 
@@ -46,7 +51,7 @@ var checkGameProgress = function() {
 //  var hasWinner = false;
   if (hasWinner) {
     // render message to screen
-    renderMsg('WINNER: ' + currentPlayer);
+    renderMsg('WINNER: ' + playerName[currentPlayer]);
     lastWinner = currentPlayer;
     score[currentPlayer]++;
     //update score board
@@ -98,11 +103,13 @@ var checkIfWinner = function() {
 
 var saveNames = function() {
   // get playerX
-  playerX = document.getElementById('Xname').value;
+  playerName.X = document.getElementById('Xname').value;
   // get playerO
-  playerO = document.getElementById('Oname').value;
+  playerName.O = document.getElementById('Oname').value;
   updatePlayerName('X');
-  updatePlayerName('O'); 
+  updatePlayerName('O');
+  renderScoreBoardWithNames();
+  renderCurrentPlayer();
 }
 
 // VIEW
@@ -147,12 +154,12 @@ var resetBoard = function() {
 
 var renderCurrentPlayer = function() {
   var element = document.getElementById('player');
-  element.innerHTML = currentPlayer;
+  element.innerHTML = playerName[currentPlayer];
 };
 
 var updateScoreBoard = function(player) {
     var element = document.getElementById(''+player+'Score');
-    element.innerHTML = player + ': ' + score[player];
+    element.innerHTML = playerName[player] + ': ' + score[player];
 };
 
 var renderMsg = function(string) {
@@ -191,10 +198,15 @@ var updatePlayerName = function(player) {
   var inputNode = document.getElementById(player + 'name');
   playerNode.removeChild(inputNode);
   if (player === 'X') {
-    var node = document.createTextNode(playerX)
+    var node = document.createTextNode(playerName.X)
     playerNode.appendChild(node);
   } else {
-    var node = document.createTextNode(playerO)
+    var node = document.createTextNode(playerName.O)
     playerNode.appendChild(node);
   }
+};
+
+var renderScoreBoardWithNames = function() {
+    document.getElementById('XScore').innerHTML = playerName.X + ': ' + score.X;
+    document.getElementById('OScore').innerHTML = playerName.O + ': ' + score.O;
 };
