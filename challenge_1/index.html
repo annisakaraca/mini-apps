@@ -11,6 +11,15 @@
     <div class="game-info">
             <h3>Current Player</h3>
             <p id="player">X</p>
+            <div id='playerX'>
+                <h3>Player X</h3>
+                <input id='Xname'/>
+            </div>
+            <div id='playerO'>
+                <h3>Player O</h3>
+                <input id='Oname'/>
+            </div>
+            <button id='save-names' onclick="saveNames()">Save Player Names</button>
      </div>
 
     <div id='gameboard'>
@@ -39,7 +48,7 @@
         <p id="OScore">O: 0</p>
     </div>
     <p id="progress"></p>
-    <button type="button" onclick="resetBoard()">New Game</button>
+    <button id="reset" type="button" onclick="resetBoard()">New Game</button>
 </body>
 </html>
 

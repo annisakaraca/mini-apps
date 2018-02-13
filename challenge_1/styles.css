@@ -24,15 +24,25 @@ td {
 }
 
 .game-info {
-    width: 100px;
+    width: 150px;
 }
 
 body {
     text-align: center;
 }
 
-button {
+#reset {
     height: 60px;
     width: 100px;
     border-radius: 10px;
+}
+
+input {
+    width: 100px;
+}
+
+#save-names {
+    margin-top: 20px;
+    width: 106px;
+    align-content: center;
 }

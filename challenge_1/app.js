@@ -12,6 +12,8 @@ var score = {
     X: 0,
     O: 0
 };
+var playerX;
+var playerO;
 
 // CONTROLLER
 
@@ -94,6 +96,14 @@ var checkIfWinner = function() {
   return hasWinner;
 };
 
+var saveNames = function() {
+  // get playerX
+  playerX = document.getElementById('Xname').value;
+  // get playerO
+  playerO = document.getElementById('Oname').value;
+  updatePlayerName('X');
+  updatePlayerName('O'); 
+}
 
 // VIEW
 var updateBoardView = function(x, y) {
@@ -175,3 +185,16 @@ var colorSecondDiagonal = function() {
     document.getElementById('11').style.backgroundColor = 'green';
     document.getElementById('02').style.backgroundColor = 'green';
   };
+
+var updatePlayerName = function(player) {
+  var playerNode = document.getElementById('player' + player);
+  var inputNode = document.getElementById(player + 'name');
+  playerNode.removeChild(inputNode);
+  if (player === 'X') {
+    var node = document.createTextNode(playerX)
+    playerNode.appendChild(node);
+  } else {
+    var node = document.createTextNode(playerO)
+    playerNode.appendChild(node);
+  }
+};
