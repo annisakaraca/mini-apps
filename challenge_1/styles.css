@@ -25,6 +25,7 @@ td {
 
 .game-info {
     width: 150px;
+    align-content: center;
 }
 
 body {

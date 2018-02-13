@@ -19,25 +19,25 @@
                 <h3>Player O</h3>
                 <input id='Oname'/>
             </div>
-            <button id='save-names' onclick="saveNames()">Save Player Names</button>
+            <button id='save-names' onclick="controller.saveNames()">Save Player Names</button>
      </div>
 
     <div id='gameboard'>
         <table>
             <tr>
-                <td id="00" onclick="playMove(0,0)"></td>
-                <td id="01" onclick="playMove(0,1)"></td>
-                <td id="02" onclick="playMove(0,2)"></td>
+                <td id="00" onclick="controller.playMove(0,0)"></td>
+                <td id="01" onclick="controller.playMove(0,1)"></td>
+                <td id="02" onclick="controller.playMove(0,2)"></td>
             </tr>
             <tr>
-                <td id="10" onclick="playMove(1,0)"></td>
-                <td id="11" onclick="playMove(1,1)"></td>
-                <td id="12" onclick="playMove(1,2)"></td>
+                <td id="10" onclick="controller.playMove(1,0)"></td>
+                <td id="11" onclick="controller.playMove(1,1)"></td>
+                <td id="12" onclick="controller.playMove(1,2)"></td>
             </tr>
             <tr>
-                <td id="20" onclick="playMove(2,0)"></td>
-                <td id="21" onclick="playMove(2,1)"></td>
-                <td id="22" onclick="playMove(2,2)"></td>
+                <td id="20" onclick="controller.playMove(2,0)"></td>
+                <td id="21" onclick="controller.playMove(2,1)"></td>
+                <td id="22" onclick="controller.playMove(2,2)"></td>
             </tr>
         </table>
     </div>
