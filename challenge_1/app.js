@@ -63,6 +63,7 @@ var checkIfWinner = function() {
     var rowIsPopulated = ((board[x][0] !== 0) && (board[x][1] !== 0) && (board[x][2] !== 0));
     if (board[x][0] === board[x][1] && board[x][1] === board[x][2] && rowIsPopulated) {
       hasWinner = true;
+      colorWinningRow(x);
     }
   }
   // check columns
@@ -70,17 +71,20 @@ var checkIfWinner = function() {
     var columnIsPopulated = ((board[0][x] !== 0) && (board[1][x] !== 0) && (board[2][x] !== 0));
     if (board[0][x] === board[1][x] && board[1][x] === board[2][x] && columnIsPopulated) {
       hasWinner = true;
+      colorWinningColumn(x);
     }
   }
   // check 00 to 22 diagonal
   var firstDiagonalIsPopulated = ((board[0][0] !== 0) && (board[1][1] !== 0) && (board[2][2] !== 0));
   if (board[0][0] === board[1][1] && board[1][1] === board[2][2] && firstDiagonalIsPopulated) {
     hasWinner = true;
+    colorFirstDiagonal();
   }
   // check 20 to 02 diagonal
   var secondDiagonalIsPopulated = ((board[2][0] !== 0) && (board[1][1] !== 0) && (board[0][2] !== 0));
   if (board[2][0] === board[1][1] && board[1][1] === board[0][2] && secondDiagonalIsPopulated) {
     hasWinner = true;
+    colorSecondDiagonal();
   }
 
   if (hasWinner) {
@@ -117,10 +121,10 @@ var resetBoard = function() {
   // re-render buttons
   for (var x = 0; x < 3; x++) {
     for (var y = 0; y < 3; y++) {
-      if (board[x][y] === 0) {
-        var element = document.getElementById(''+ x + y);
-        element.innerHTML = '';
-      }
+      var element = document.getElementById(''+ x + y);
+      element.innerHTML = '';
+      element.setAttribute('onclick', 'playMove('+x+','+y+')');
+      element.style.backgroundColor = 'white';
     }
   }
 
@@ -144,4 +148,30 @@ var updateScoreBoard = function(player) {
 var renderMsg = function(string) {
     var msgElement = document.getElementById('progress');
     msgElement.innerHTML = string;
-}
+};
+
+var colorWinningRow = function(row) {
+  for (var x = 0; x < 3; x++) {
+    var element = document.getElementById(''+row+x);
+    element.style.backgroundColor = "green";
+  }
+};
+
+var colorWinningColumn = function(column) {
+    for (var x = 0; x < 3; x++) {
+      var element = document.getElementById(''+x+column);
+      element.style.backgroundColor = "green";
+    }
+  };
+
+var colorFirstDiagonal = function() {
+  document.getElementById('00').style.backgroundColor = 'green';
+  document.getElementById('11').style.backgroundColor = 'green';
+  document.getElementById('22').style.backgroundColor = 'green';
+};
+
+var colorSecondDiagonal = function() {
+    document.getElementById('20').style.backgroundColor = 'green';
+    document.getElementById('11').style.backgroundColor = 'green';
+    document.getElementById('02').style.backgroundColor = 'green';
+  };

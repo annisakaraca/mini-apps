@@ -13,6 +13,7 @@ tr {
 td {
     width: 100px;
     text-align: center;
+    font-size: 30px;
 }
 
 #gameboard, .game-info {
@@ -20,4 +21,18 @@ td {
     margin: 20px;
     vertical-align: text-top;
     
+}
+
+.game-info {
+    width: 100px;
+}
+
+body {
+    text-align: center;
+}
+
+button {
+    height: 60px;
+    width: 100px;
+    border-radius: 10px;
 }
