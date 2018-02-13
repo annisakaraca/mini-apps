@@ -1,0 +1,23 @@
+table, td {
+    border: 1px solid black;
+}
+
+table {
+    width: 300px;
+}
+
+tr {
+    height: 100px;
+}
+
+td {
+    width: 100px;
+    text-align: center;
+}
+
+#gameboard, .game-info {
+    display: inline-block;
+    margin: 20px;
+    vertical-align: text-top;
+    
+}

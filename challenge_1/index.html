@@ -1,35 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title> Tic Tac Toe</title>
-<script src="app.js"></script>
+    <title> Tic Tac Toe</title>
+    <script src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
     <h3>Tic Tac Toe by Annisa</h3>
-    <table>
-        <tr>
-            <td id="00"><button type="button" onclick="playMove(0,0)">play</button></td>
-            <td id="01"><button type="button" onclick="playMove(0,1)">play</button></td>
-            <td id="02"><button type="button" onclick="playMove(0,2)">play</button></td>
-        </tr>
-        <tr>
-            <td id="10"><button type="button" onclick="playMove(1,0)">play</button></td>
-            <td id="11"><button type="button" onclick="playMove(1,1)">play</button></td>
-            <td id="12"><button type="button" onclick="playMove(1,2)">play</button></td>
-        </tr>
-        <tr>
-            <td id="20"><button type="button" onclick="playMove(2,0)">play</button></td>
-            <td id="21"><button type="button" onclick="playMove(2,1)">play</button></td>
-            <td id="22"><button type="button" onclick="playMove(2,2)">play</button></td>
-        </tr>
-    </table>
-    <h3>Current Player</h3>
-    <p id="player">X</p>
+
+    <div class="game-info">
+            <h3>Current Player</h3>
+            <p id="player">X</p>
+     </div>
+
+    <div id='gameboard'>
+        <table>
+            <tr>
+                <td id="00" onclick="playMove(0,0)"></td>
+                <td id="01" onclick="playMove(0,1)"></td>
+                <td id="02" onclick="playMove(0,2)"></td>
+            </tr>
+            <tr>
+                <td id="10" onclick="playMove(1,0)"></td>
+                <td id="11" onclick="playMove(1,1)"></td>
+                <td id="12" onclick="playMove(1,2)"></td>
+            </tr>
+            <tr>
+                <td id="20" onclick="playMove(2,0)"></td>
+                <td id="21" onclick="playMove(2,1)"></td>
+                <td id="22" onclick="playMove(2,2)"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="game-info">
+        <h3 class="game-info">Score Board</h3>
+        <p id="XScore">X: 0</p>
+        <p id="OScore">O: 0</p>
+    </div>
     <h3>Game Progress</h3>
     <p id="progress"></p>
-    <h3>Score Board</h3>
-    <p id="XScore">X: 0</p>
-    <p id="OScore">O: 0</p>
+
     <h3>Reset game</h3>
     <button type="button" onclick="resetBoard()">reset</button>
 </body>

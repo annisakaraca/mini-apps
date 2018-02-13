@@ -16,13 +16,18 @@ var score = {
 // CONTROLLER
 
 var playMove = function(x,y) {
-  console.log(x,y)
-  // update board array
-  board[x][y] = currentPlayer;
-  updateBoardView(x,y);
-  moveCounter++;
-  checkGameProgress();
-  toggleCurrentPlayer();
+  renderMsg('');
+  // check if move is valid
+  if (board[x][y] !== 0) {
+    renderMsg('invalid move');
+  } else {
+    // update board array
+    board[x][y] = currentPlayer;
+    updateBoardView(x,y);
+    moveCounter++;
+    checkGameProgress();
+    toggleCurrentPlayer();
+  }
 };
 
 var toggleCurrentPlayer = function() {
@@ -35,19 +40,18 @@ var toggleCurrentPlayer = function() {
 };
 
 var checkGameProgress = function() {
-  var msgElement = document.getElementById('progress');
   var hasWinner = checkIfWinner();
 //  var hasWinner = false;
   if (hasWinner) {
     // render message to screen
-    msgElement.innerHTML = 'WINNER: ' + currentPlayer;
+    renderMsg('WINNER: ' + currentPlayer);
     lastWinner = currentPlayer;
     score[currentPlayer]++;
     //update score board
     updateScoreBoard(currentPlayer);
   } else if (moveCounter === 9) {
     // render tie message to screen
-    msgElement.innerHTML = 'Game over: TIE';
+    renderMsg('Game over: TIE');
   }
 };
 
@@ -90,23 +94,17 @@ var checkIfWinner = function() {
 // VIEW
 var updateBoardView = function(x, y) {
   var element = document.getElementById('' + x + y);
-  element.removeChild(element.childNodes[0]);
-  var node = document.createTextNode(board[x][y]);
-  element.appendChild(node);
-  console.log(element);
+  element.innerHTML = currentPlayer;
 };
 
 var disableButtons = function() {
   // iterate through board array
   for (var x = 0; x < 3; x++) {
     for (var y = 0; y < 3; y++) {
-      if (board[x][y] === 0) {
-        var element = document.getElementById(''+ x + y);
-        element.childNodes[0].setAttribute('disabled', true);
+      var element = document.getElementById(''+ x + y);
+      element.setAttribute('onclick', '{}');
       }
     }
-  }
-    // for each position = 0, disable button
 }
 
 var resetBoard = function() {
@@ -121,17 +119,13 @@ var resetBoard = function() {
     for (var y = 0; y < 3; y++) {
       if (board[x][y] === 0) {
         var element = document.getElementById(''+ x + y);
-        element.removeChild(element.childNodes[0]);
-        var btnNode = document.createElement("button");
-        btnNode.innerHTML = 'play';
-        btnNode.setAttribute('onclick', 'playMove('+x+','+y+')');
-        element.appendChild(btnNode);
+        element.innerHTML = '';
       }
     }
   }
 
   // re-set current player to X
-  currentPlayer = lastWinner;
+  currentPlayer = lastWinner || currentPlayer;
 
   // re-set move counter
   moveCounter = 0;
@@ -146,3 +140,8 @@ var updateScoreBoard = function(player) {
     var element = document.getElementById(''+player+'Score');
     element.innerHTML = player + ': ' + score[player];
 };
+
+var renderMsg = function(string) {
+    var msgElement = document.getElementById('progress');
+    msgElement.innerHTML = string;
+}
