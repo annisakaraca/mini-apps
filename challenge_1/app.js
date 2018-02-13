@@ -1,47 +1,45 @@
-
 // MODEL
-var board = [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0]
-];
-var currentPlayer = 'X';
-var moveCounter = 0;
-var lastWinner;
-var score = {
-    X: 0,
-    O: 0
+var model = {
+    board: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ],
+    currentPlayer: 'X',
+    moveCounter: 0,
+    lastWinner: undefined,
+    score: {
+        X: 0,
+        O: 0
+    },
+    playerName: {
+        X: 'X',
+        O: 'O'
+    }
 };
-
-var playerName = {
-    X: 'X',
-    O: 'O'
-};
-// var playerX = 'X';
-// var playerO = 'O';
 
 // CONTROLLER
 
 var playMove = function(x,y) {
   renderMsg('');
   // check if move is valid
-  if (board[x][y] !== 0) {
+  if (model.board[x][y] !== 0) {
     renderMsg('invalid move');
   } else {
     // update board array
-    board[x][y] = currentPlayer;
+    model.board[x][y] = model.currentPlayer;
     updateBoardView(x,y);
-    moveCounter++;
+    model.moveCounter++;
     checkGameProgress();
     toggleCurrentPlayer();
   }
 };
 
 var toggleCurrentPlayer = function() {
-  if (currentPlayer === 'X') {
-      currentPlayer = 'O';
+  if (model.currentPlayer === 'X') {
+      model.currentPlayer = 'O';
   } else {
-      currentPlayer = 'X';
+      model.currentPlayer = 'X';
   }
   renderCurrentPlayer();
 };
@@ -51,12 +49,12 @@ var checkGameProgress = function() {
 //  var hasWinner = false;
   if (hasWinner) {
     // render message to screen
-    renderMsg('WINNER: ' + playerName[currentPlayer]);
-    lastWinner = currentPlayer;
-    score[currentPlayer]++;
+    renderMsg('WINNER: ' + model.playerName[model.currentPlayer]);
+    model.lastWinner = model.currentPlayer;
+    model.score[model.currentPlayer]++;
     //update score board
-    updateScoreBoard(currentPlayer);
-  } else if (moveCounter === 9) {
+    updateScoreBoard(model.currentPlayer);
+  } else if (model.moveCounter === 9) {
     // render tie message to screen
     renderMsg('Game over: TIE');
   }
@@ -67,29 +65,29 @@ var checkIfWinner = function() {
   var hasWinner = false;
   // check rows
   for (var x = 0; x < 3; x++) {
-    var rowIsPopulated = ((board[x][0] !== 0) && (board[x][1] !== 0) && (board[x][2] !== 0));
-    if (board[x][0] === board[x][1] && board[x][1] === board[x][2] && rowIsPopulated) {
+    var rowIsPopulated = ((model.board[x][0] !== 0) && (model.board[x][1] !== 0) && (model.board[x][2] !== 0));
+    if (model.board[x][0] === model.board[x][1] && model.board[x][1] === model.board[x][2] && rowIsPopulated) {
       hasWinner = true;
       colorWinningRow(x);
     }
   }
   // check columns
   for (var x = 0; x < 3; x++) {
-    var columnIsPopulated = ((board[0][x] !== 0) && (board[1][x] !== 0) && (board[2][x] !== 0));
-    if (board[0][x] === board[1][x] && board[1][x] === board[2][x] && columnIsPopulated) {
+    var columnIsPopulated = ((model.board[0][x] !== 0) && (model.board[1][x] !== 0) && (model.board[2][x] !== 0));
+    if (model.board[0][x] === model.board[1][x] && model.board[1][x] === model.board[2][x] && columnIsPopulated) {
       hasWinner = true;
       colorWinningColumn(x);
     }
   }
   // check 00 to 22 diagonal
-  var firstDiagonalIsPopulated = ((board[0][0] !== 0) && (board[1][1] !== 0) && (board[2][2] !== 0));
-  if (board[0][0] === board[1][1] && board[1][1] === board[2][2] && firstDiagonalIsPopulated) {
+  var firstDiagonalIsPopulated = ((model.board[0][0] !== 0) && (model.board[1][1] !== 0) && (model.board[2][2] !== 0));
+  if (model.board[0][0] === model.board[1][1] && model.board[1][1] === model.board[2][2] && firstDiagonalIsPopulated) {
     hasWinner = true;
     colorFirstDiagonal();
   }
   // check 20 to 02 diagonal
-  var secondDiagonalIsPopulated = ((board[2][0] !== 0) && (board[1][1] !== 0) && (board[0][2] !== 0));
-  if (board[2][0] === board[1][1] && board[1][1] === board[0][2] && secondDiagonalIsPopulated) {
+  var secondDiagonalIsPopulated = ((model.board[2][0] !== 0) && (model.board[1][1] !== 0) && (model.board[0][2] !== 0));
+  if (model.board[2][0] === model.board[1][1] && model.board[1][1] === model.board[0][2] && secondDiagonalIsPopulated) {
     hasWinner = true;
     colorSecondDiagonal();
   }
@@ -103,9 +101,9 @@ var checkIfWinner = function() {
 
 var saveNames = function() {
   // get playerX
-  playerName.X = document.getElementById('Xname').value;
+  model.playerName.X = document.getElementById('Xname').value;
   // get playerO
-  playerName.O = document.getElementById('Oname').value;
+  model.playerName.O = document.getElementById('Oname').value;
   updatePlayerName('X');
   updatePlayerName('O');
   renderScoreBoardWithNames();
@@ -115,7 +113,7 @@ var saveNames = function() {
 // VIEW
 var updateBoardView = function(x, y) {
   var element = document.getElementById('' + x + y);
-  element.innerHTML = currentPlayer;
+  element.innerHTML = model.currentPlayer;
 };
 
 var disableButtons = function() {
@@ -130,7 +128,7 @@ var disableButtons = function() {
 
 var resetBoard = function() {
   // reset model
-  board = [
+  model.board = [
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0]
@@ -146,20 +144,20 @@ var resetBoard = function() {
   }
 
   // re-set current player to X
-  currentPlayer = lastWinner || currentPlayer;
+  model.currentPlayer = model.lastWinner || model.currentPlayer;
 
   // re-set move counter
-  moveCounter = 0;
+  model.moveCounter = 0;
 };
 
 var renderCurrentPlayer = function() {
   var element = document.getElementById('player');
-  element.innerHTML = playerName[currentPlayer];
+  element.innerHTML = model.playerName[model.currentPlayer];
 };
 
 var updateScoreBoard = function(player) {
     var element = document.getElementById(''+player+'Score');
-    element.innerHTML = playerName[player] + ': ' + score[player];
+    element.innerHTML = model.playerName[player] + ': ' + model.score[player];
 };
 
 var renderMsg = function(string) {
@@ -198,15 +196,15 @@ var updatePlayerName = function(player) {
   var inputNode = document.getElementById(player + 'name');
   playerNode.removeChild(inputNode);
   if (player === 'X') {
-    var node = document.createTextNode(playerName.X)
+    var node = document.createTextNode(model.playerName.X)
     playerNode.appendChild(node);
   } else {
-    var node = document.createTextNode(playerName.O)
+    var node = document.createTextNode(model.playerName.O)
     playerNode.appendChild(node);
   }
 };
 
 var renderScoreBoardWithNames = function() {
-    document.getElementById('XScore').innerHTML = playerName.X + ': ' + score.X;
-    document.getElementById('OScore').innerHTML = playerName.O + ': ' + score.O;
+    document.getElementById('XScore').innerHTML = model.playerName.X + ': ' + model.score.X;
+    document.getElementById('OScore').innerHTML = model.playerName.O + ': ' + model.score.O;
 };
