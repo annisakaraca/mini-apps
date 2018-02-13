@@ -7,17 +7,27 @@ var board = [
 ];
 var currentPlayer = 'X';
 var moveCounter = 0;
+var lastWinner;
+var score = {
+    X: 0,
+    O: 0
+};
 
 // CONTROLLER
 
 var playMove = function(x,y) {
-  console.log(x,y)
-  // update board array
-  board[x][y] = currentPlayer;
-  updateBoardView(x,y);
-  moveCounter++;
-  checkGameProgress();
-  toggleCurrentPlayer();
+  renderMsg('');
+  // check if move is valid
+  if (board[x][y] !== 0) {
+    renderMsg('invalid move');
+  } else {
+    // update board array
+    board[x][y] = currentPlayer;
+    updateBoardView(x,y);
+    moveCounter++;
+    checkGameProgress();
+    toggleCurrentPlayer();
+  }
 };
 
 var toggleCurrentPlayer = function() {
@@ -26,18 +36,22 @@ var toggleCurrentPlayer = function() {
   } else {
       currentPlayer = 'X';
   }
+  renderCurrentPlayer();
 };
 
 var checkGameProgress = function() {
-  var msgElement = document.getElementById('progress');
   var hasWinner = checkIfWinner();
 //  var hasWinner = false;
   if (hasWinner) {
     // render message to screen
-    msgElement.innerHTML = 'WINNER: ' + currentPlayer;
+    renderMsg('WINNER: ' + currentPlayer);
+    lastWinner = currentPlayer;
+    score[currentPlayer]++;
+    //update score board
+    updateScoreBoard(currentPlayer);
   } else if (moveCounter === 9) {
     // render tie message to screen
-    msgElement.innerHTML = 'Game over: TIE';
+    renderMsg('Game over: TIE');
   }
 };
 
@@ -49,6 +63,7 @@ var checkIfWinner = function() {
     var rowIsPopulated = ((board[x][0] !== 0) && (board[x][1] !== 0) && (board[x][2] !== 0));
     if (board[x][0] === board[x][1] && board[x][1] === board[x][2] && rowIsPopulated) {
       hasWinner = true;
+      colorWinningRow(x);
     }
   }
   // check columns
@@ -56,17 +71,20 @@ var checkIfWinner = function() {
     var columnIsPopulated = ((board[0][x] !== 0) && (board[1][x] !== 0) && (board[2][x] !== 0));
     if (board[0][x] === board[1][x] && board[1][x] === board[2][x] && columnIsPopulated) {
       hasWinner = true;
+      colorWinningColumn(x);
     }
   }
   // check 00 to 22 diagonal
   var firstDiagonalIsPopulated = ((board[0][0] !== 0) && (board[1][1] !== 0) && (board[2][2] !== 0));
   if (board[0][0] === board[1][1] && board[1][1] === board[2][2] && firstDiagonalIsPopulated) {
     hasWinner = true;
+    colorFirstDiagonal();
   }
   // check 20 to 02 diagonal
   var secondDiagonalIsPopulated = ((board[2][0] !== 0) && (board[1][1] !== 0) && (board[0][2] !== 0));
   if (board[2][0] === board[1][1] && board[1][1] === board[0][2] && secondDiagonalIsPopulated) {
     hasWinner = true;
+    colorSecondDiagonal();
   }
 
   if (hasWinner) {
@@ -80,23 +98,17 @@ var checkIfWinner = function() {
 // VIEW
 var updateBoardView = function(x, y) {
   var element = document.getElementById('' + x + y);
-  element.removeChild(element.childNodes[0]);
-  var node = document.createTextNode(board[x][y]);
-  element.appendChild(node);
-  console.log(element);
+  element.innerHTML = currentPlayer;
 };
 
 var disableButtons = function() {
   // iterate through board array
   for (var x = 0; x < 3; x++) {
     for (var y = 0; y < 3; y++) {
-      if (board[x][y] === 0) {
-        var element = document.getElementById(''+ x + y);
-        element.childNodes[0].setAttribute('disabled', true);
+      var element = document.getElementById(''+ x + y);
+      element.setAttribute('onclick', '{}');
       }
     }
-  }
-    // for each position = 0, disable button
 }
 
 var resetBoard = function() {
@@ -109,20 +121,57 @@ var resetBoard = function() {
   // re-render buttons
   for (var x = 0; x < 3; x++) {
     for (var y = 0; y < 3; y++) {
-      if (board[x][y] === 0) {
-        var element = document.getElementById(''+ x + y);
-        element.removeChild(element.childNodes[0]);
-        var btnNode = document.createElement("button");
-        btnNode.innerHTML = 'play';
-        btnNode.setAttribute('onclick', 'playMove('+x+','+y+')');
-        element.appendChild(btnNode);
-      }
+      var element = document.getElementById(''+ x + y);
+      element.innerHTML = '';
+      element.setAttribute('onclick', 'playMove('+x+','+y+')');
+      element.style.backgroundColor = 'white';
     }
   }
 
   // re-set current player to X
-  currentPlayer = 'X';
+  currentPlayer = lastWinner || currentPlayer;
 
   // re-set move counter
   moveCounter = 0;
 };
+
+var renderCurrentPlayer = function() {
+  var element = document.getElementById('player');
+  element.innerHTML = currentPlayer;
+};
+
+var updateScoreBoard = function(player) {
+    var element = document.getElementById(''+player+'Score');
+    element.innerHTML = player + ': ' + score[player];
+};
+
+var renderMsg = function(string) {
+    var msgElement = document.getElementById('progress');
+    msgElement.innerHTML = string;
+};
+
+var colorWinningRow = function(row) {
+  for (var x = 0; x < 3; x++) {
+    var element = document.getElementById(''+row+x);
+    element.style.backgroundColor = "green";
+  }
+};
+
+var colorWinningColumn = function(column) {
+    for (var x = 0; x < 3; x++) {
+      var element = document.getElementById(''+x+column);
+      element.style.backgroundColor = "green";
+    }
+  };
+
+var colorFirstDiagonal = function() {
+  document.getElementById('00').style.backgroundColor = 'green';
+  document.getElementById('11').style.backgroundColor = 'green';
+  document.getElementById('22').style.backgroundColor = 'green';
+};
+
+var colorSecondDiagonal = function() {
+    document.getElementById('20').style.backgroundColor = 'green';
+    document.getElementById('11').style.backgroundColor = 'green';
+    document.getElementById('02').style.backgroundColor = 'green';
+  };
