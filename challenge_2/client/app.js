@@ -3,13 +3,15 @@
 // view
 $(document).ready(function(){
   console.log('window ready');
-  $('#submit-btn').on("click", clickHandler);
+  $('#submit-btn').on("click", function(event){
+    event.preventDefault();
+    clickHandler();
+  });
 })
 
 var renderResult = function(resultArray){
-  console.log('resultArray', resultArray);
   var resultString = resultArray.join('<br>');
-  $('#generated-report').append('<p>'+resultString+'</p>');
+  $('#generated-report').append('<h3>Generated CSV Report</h3><p>'+resultString+'</p>');
 }
 
 // controller

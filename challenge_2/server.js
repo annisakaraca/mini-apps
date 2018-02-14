@@ -18,7 +18,6 @@ app.use(bodyParser.json({
 app.post('/', (req,res) => {
   var employeeList = traverseEmployees(req.body);
   var flattenedJSON = writeEmployees(employeeList);
-  console.log(flattenedJSON);
   res.send(flattenedJSON);
 })
 
@@ -42,8 +41,8 @@ var traverseEmployees = function(node) {
 var writeEmployees = function(employeeList) {
   var output = getPropertiesOfList(employeeList[0]);
 
-  employeeList.forEach(function(employee) {
-    var employeeArray = [];
+  employeeList.forEach(function(employee, index) {
+    var employeeArray = [index];
     output[0].forEach(function(attribute) {
       employeeArray.push(employee[attribute]);
     })
