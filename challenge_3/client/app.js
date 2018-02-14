@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const title = 'My sad incomplete connect four react webpack babel setup';
-
-ReactDOM.render(
-  <div>{title}</div>,
-  document.getElementById('app')
-);
+// state
+var boardState = [
+  [[1],[-1],[-1],[-1],[-1],[-1],[-1]],
+  [[-1],[2],[-1],[-1],[-1],[-1],[-1]],
+  [[-1],[-1],[3],[-1],[-1],[-1],[-1]],
+  [[-1],[-1],[-1],[4],[-1],[-1],[-1]],
+  [[-1],[]-1,[-1],[-1],[5],[-1],[-1]],
+  [[-1],[-1],[-1],[-1],[-1],[6],[-1]]
+]
 
 class Square extends React.Component {
   render() {
@@ -24,15 +27,17 @@ class Row extends React.Component {
   }
 
   render() {
+    console.dir(this.props.state);
+
     return (
       <tr className="board-row">
-        {this.renderSquare(0)}
-        {this.renderSquare(1)}
-        {this.renderSquare(2)}
-        {this.renderSquare(3)}
-        {this.renderSquare(4)}
-        {this.renderSquare(5)}
-        {this.renderSquare(6)}
+        {this.renderSquare(this.props.state[0])}
+        {this.renderSquare(this.props.state[1])}
+        {this.renderSquare(this.props.state[2])}
+        {this.renderSquare(this.props.state[3])}
+        {this.renderSquare(this.props.state[4])}
+        {this.renderSquare(this.props.state[5])}
+        {this.renderSquare(this.props.state[6])}
     </tr>
     );
   }
@@ -40,19 +45,16 @@ class Row extends React.Component {
 
 class Board extends React.Component {
 
-
   render() {
-    const status = 'Next player: X';
-
     return (
       <table>
         <tbody>
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
+          <Row state={this.props.state[0]}/>
+          <Row state={this.props.state[1]}/>
+          <Row state={this.props.state[2]}/>
+          <Row state={this.props.state[3]}/>
+          <Row state={this.props.state[4]}/>
+          <Row state={this.props.state[5]}/>
         </tbody>
       </table>
     );
@@ -64,7 +66,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
+          <Board state={this.props.state}/>
         </div>
         <div className="game-info">
           <div></div>
@@ -76,7 +78,7 @@ class Game extends React.Component {
 }
 
 ReactDOM.render(
-  <Game />,
+  <Game state={boardState}/>,
   document.getElementById('app')
 );
 
