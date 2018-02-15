@@ -2,7 +2,7 @@ var React = require('react');
 
 var keyPadNumber = function(props) {
   return (
-    <button>{props.number}</button>
+    <button onClick={() => {props.bowl(props.number)}}>{props.number}</button>
   )
 }
 

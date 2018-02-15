@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+ 
+var Game = require('./game');
 
-var Keypad = require('./keypad')
 
 ReactDOM.render(
-  <Keypad />,
+  <Game />,
   document.getElementById('app')
 );
 
