@@ -12,14 +12,15 @@ var boardState = [
 ]
 
 class Square extends React.Component {
-  squareStyle = {
-    width: '19px'
+  divStyle = {
+    display:'inline-block',
+    width: '50px',
+    height: '50px'
   }
+  
   render() {
     return (
-      <td className="square" style={this.squareStyle}>
-        <div>{this.props.value}</div>
-      </td>
+      <div style={this.divStyle}>{this.props.value}</div>
     );
   }
 }
@@ -31,7 +32,7 @@ class Row extends React.Component {
 
   render() {
     return (
-      <tr className="board-row">
+      <div className="board-row">
         {this.renderSquare(this.props.state[0])}
         {this.renderSquare(this.props.state[1])}
         {this.renderSquare(this.props.state[2])}
@@ -39,22 +40,30 @@ class Row extends React.Component {
         {this.renderSquare(this.props.state[4])}
         {this.renderSquare(this.props.state[5])}
         {this.renderSquare(this.props.state[6])}
-      </tr>
+      </div>
     );
   }
 }
 
 class ButtonRow extends React.Component {
+  buttonStyle = {
+    width: '40px',
+    height: '25px',
+    marginLeft: '3px',
+    marginRight: '3px',
+    marginBottom: '10px'
+  }
+
   render() {
     return (
       <div>
-        <button onClick={() =>{this.props.onClick(0)}}>0</button>
-        <button onClick={() =>{this.props.onClick(1)}}>1</button>
-        <button onClick={() =>{this.props.onClick(2)}}>2</button>
-        <button onClick={() =>{this.props.onClick(3)}}>3</button>
-        <button onClick={() =>{this.props.onClick(4)}}>4</button>
-        <button onClick={() =>{this.props.onClick(5)}}>5</button>
-        <button onClick={() =>{this.props.onClick(6)}}>6</button>
+        <button style={this.buttonStyle} onClick={() =>{this.props.onClick(0)}}>0</button>
+        <button style={this.buttonStyle} onClick={() =>{this.props.onClick(1)}}>1</button>
+        <button style={this.buttonStyle} onClick={() =>{this.props.onClick(2)}}>2</button>
+        <button style={this.buttonStyle} onClick={() =>{this.props.onClick(3)}}>3</button>
+        <button style={this.buttonStyle} onClick={() =>{this.props.onClick(4)}}>4</button>
+        <button style={this.buttonStyle} onClick={() =>{this.props.onClick(5)}}>5</button>
+        <button style={this.buttonStyle} onClick={() =>{this.props.onClick(6)}}>6</button>
       </div>
     );
   }
@@ -70,11 +79,23 @@ class Board extends React.Component {
     };
   }
 
+  rowStyle = {
+    marginLeft: '5px'
+  }
+
   togglePlayer(player) {
     if (player === 1) {
       return 2;
     } if (player === 2) {
       return 1;
+    }
+  }
+
+  checkForTie() {
+    console.log(this.state.boardState[0].indexOf(-1));
+    console.log(this.state.boardState[0]);
+    if (this.state.boardState[0].indexOf(-1) === -1) {
+      this.setState({winningMessage: 'There is a tie!'});
     }
   }
 
@@ -87,7 +108,6 @@ class Board extends React.Component {
       var d = this.state.boardState[row - 3][column];
 
       if (((player === a) && (a === b) && (b === c) && (c === d))) {
-        console.log('found winner!')
         this.setState({winningMessage: 'The winner is ' + this.state.player});
       }
     }
@@ -102,14 +122,11 @@ class Board extends React.Component {
       var d = this.state.boardState[row][column + 3];
 
       if (((player === a) && (a === b) && (b === c) && (c === d))) {
-        console.log('found winner!')
         this.setState({winningMessage: 'The winner is ' + this.state.player});
 
       }
     }
   }
-
-  
 
   checkForFirstDiagonalWin(row,column) {
     var originRowIndex = row;
@@ -129,7 +146,6 @@ class Board extends React.Component {
       var d = this.state.boardState[originRowIndex - 3][originColumnIndex + 3];
 
       if (((player === a) && (a === b) && (b === c) && (c === d))) {
-        console.log('found winner!')
         this.setState({winningMessage: 'The winner is ' + this.state.player});
       };
 
@@ -147,8 +163,6 @@ class Board extends React.Component {
       originRowIndex++;
       originColumnIndex++;
     }
-
-    console.log(originRowIndex, originColumnIndex);
 
     for (var x = 0; x < 3; x++) {
       var a = this.state.boardState[originRowIndex][originColumnIndex];
@@ -175,6 +189,9 @@ class Board extends React.Component {
         var checkVerticalHorizontalWin = this.checkForVerticalWin(i) || this.checkForHorizontalWin(row);
         this.checkForFirstDiagonalWin(row, i);
         this.checkForSecondDiagonalWin(row, i);
+        if (row === 0) {
+          this.checkForTie();
+        }
         this.setState({player: nextPlayer})
         break;
       }
@@ -185,17 +202,15 @@ class Board extends React.Component {
     return (
       <div>
         <ButtonRow togglePlayer={this.togglePlayer} onClick={this.dropPiece.bind(this)}/>
-        <table>
-          <tbody>
+
             
-            <Row state={this.props.state[0]}/>
-            <Row state={this.props.state[1]}/>
-            <Row state={this.props.state[2]}/>
-            <Row state={this.props.state[3]}/>
-            <Row state={this.props.state[4]}/>
-            <Row state={this.props.state[5]}/>
-          </tbody>
-        </table>
+            <Row style={this.rowStyle} state={this.props.state[0]}/>
+            <Row style={this.rowStyle} state={this.props.state[1]}/>
+            <Row style={this.rowStyle} state={this.props.state[2]}/>
+            <Row style={this.rowStyle} state={this.props.state[3]}/>
+            <Row style={this.rowStyle} state={this.props.state[4]}/>
+            <Row style={this.rowStyle} state={this.props.state[5]}/>
+
         <div className="game-status">
           <h3 className="winner-message">{this.state.winningMessage}</h3>
         </div>
