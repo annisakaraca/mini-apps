@@ -18,7 +18,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx']
   },
   output: {
-    path: __dirname + '/client',
+    path: __dirname + '/dist',
     publicPath: '/',
     filename: 'bundle.js'
   },

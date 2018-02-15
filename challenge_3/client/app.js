@@ -229,6 +229,6 @@ ReactDOM.render(
 
 
 
-module.hot.accept();
+// module.hot.accept();
 
 
