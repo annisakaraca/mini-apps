@@ -12,9 +12,12 @@ var boardState = [
 ]
 
 class Square extends React.Component {
+  squareStyle = {
+    width: '19px'
+  }
   render() {
     return (
-      <td className="square">
+      <td className="square" style={this.squareStyle}>
         <div>{this.props.value}</div>
       </td>
     );
@@ -62,7 +65,8 @@ class Board extends React.Component {
     super(props);
     this.state = {
       boardState: this.props.state,
-      player: this.props.player
+      player: this.props.player, 
+      winningMessage: ''
     };
   }
 
@@ -84,6 +88,7 @@ class Board extends React.Component {
 
       if (((player === a) && (a === b) && (b === c) && (c === d))) {
         console.log('found winner!')
+        this.setState({winningMessage: 'The winner is ' + this.state.player});
       }
     }
   }
@@ -98,6 +103,8 @@ class Board extends React.Component {
 
       if (((player === a) && (a === b) && (b === c) && (c === d))) {
         console.log('found winner!')
+        this.setState({winningMessage: 'The winner is ' + this.state.player});
+
       }
     }
   }
@@ -123,6 +130,7 @@ class Board extends React.Component {
 
       if (((player === a) && (a === b) && (b === c) && (c === d))) {
         console.log('found winner!')
+        this.setState({winningMessage: 'The winner is ' + this.state.player});
       };
 
       originRowIndex--;
@@ -149,13 +157,12 @@ class Board extends React.Component {
       var d = this.state.boardState[originRowIndex - 3][originColumnIndex - 3];
 
       if (((player === a) && (a === b) && (b === c) && (c === d))) {
-        console.log('found winner!')
+        this.setState({winningMessage: 'The winner is ' + this.state.player});
       };
 
       originRowIndex--;
       originColumnIndex--;
     }
-
   }
 
   dropPiece(i) {
@@ -189,6 +196,9 @@ class Board extends React.Component {
             <Row state={this.props.state[5]}/>
           </tbody>
         </table>
+        <div className="game-status">
+          <h3 className="winner-message">{this.state.winningMessage}</h3>
+        </div>
       </div>
     );
   }
@@ -205,6 +215,7 @@ class Game extends React.Component {
           <div></div>
           <ol></ol>
         </div>
+
       </div>
     );
   }
