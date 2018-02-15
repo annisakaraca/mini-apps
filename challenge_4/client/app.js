@@ -1,17 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const title = 'happy sad chocolate day';
-const title2 = 'i wont change';
+var Keypad = require('./keypad')
 
 ReactDOM.render(
-  <div>{title}<div id='title'></div></div>,
+  <Keypad />,
   document.getElementById('app')
 );
 
-ReactDOM.render(
-  <div>{title2}</div>,
-  document.getElementById('title')
-);
-
-module.hot.accept();
+// module.hot.accept();
