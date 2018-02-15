@@ -1,5 +1,6 @@
 var React = require('react');
-var Keypad = require('./keypad')
+var Keypad = require('./keypad');
+var Scoreboard = require('./scoreboard');
 
 class Game extends React.Component {
   constructor(props) {
@@ -101,7 +102,10 @@ class Game extends React.Component {
 
   render() {
     return(
-      <Keypad bowl={this.bowl.bind(this)}/>
+      <div>
+        <Keypad bowl={this.bowl.bind(this)}/>
+        <Scoreboard score={this.state.score}/>
+      </div>
     )
   }
 }
