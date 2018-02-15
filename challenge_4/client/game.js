@@ -13,10 +13,15 @@ class Game extends React.Component {
   }
 
   bowl(number) {
-    console.log('clicked!')
+
     // update current frame
     var updatedCurrentFrame = this.state.currentFrame.slice();
     updatedCurrentFrame.push(number);
+
+    // if person gets a strike on the first move, fill in second move
+    if (updatedCurrentFrame.length === 1 && updatedCurrentFrame[0] === 10) {
+      updatedCurrentFrame.push(0);
+    }
 
     // if current frame has 2 after being updated -> update moveHistory
     if (updatedCurrentFrame.length === 2) {
@@ -33,11 +38,9 @@ class Game extends React.Component {
       } else if (updatedCurrentFrame[0] + updatedCurrentFrame[1] === 10) {
         updatedScoresByMove.push('/');
       } 
-      console.log('updated state', updatedScoresByMove);
       this.setState({scoresByMove: updatedScoresByMove}, () => {
         // calculate new score from scratch
         var newScore = 0;
-        console.log('current state', this.state.scoresByMove);
         for (var x = 0; x < this.state.scoresByMove.length; x++) {
           if (this.state.scoresByMove[x] !== 'X' && this.state.scoresByMove[x] !== '/') {
             newScore += this.state.scoresByMove[x];
@@ -48,38 +51,48 @@ class Game extends React.Component {
               var scoresByMoveCopy = this.state.scoresByMove.slice();
               var replaceSplitScore = 10 + this.state.moveHistory[x+1][0];
               scoresByMoveCopy[x] = replaceSplitScore;
-              console.log('scoresByMoveCopy', scoresByMoveCopy);
-              this.setState({scoresByMove: scoresByMoveCopy}, () => (console.log('cb', this.state.scoresByMove)));
+              this.setState({scoresByMove: scoresByMoveCopy});
               newScore += (10 + this.state.moveHistory[x + 1][0]);
             } else {
               newScore = 'cannot calculate yet';
+              // break;
             }
           } else if (updatedScoresByMove[x] === 'X') {
-              if (this.state.scoresByMove[x+1]) {
-                // replace '/' in scoresByMove
-                var scoresByMoveCopy = this.state.scoresByMove.slice();
-                var replaceStrikeScore = 10 + this.state.moveHistory[x+1][0] + this.state.moveHistory[x+1][1];
-                console.log('replaceStrikeScore', replaceStrikeScore);
-                scoresByMoveCopy[x] = replaceStrikeScore;
-                console.log('scoresByMoveCopy', scoresByMoveCopy);
-                this.setState({scoresByMove: scoresByMoveCopy}, () => (console.log('cb', this.state.scoresByMove)));
-                newScore += (10 + this.state.moveHistory[x + 1][0] + this.state.moveHistory[x + 1][1]);
+              if (this.state.scoresByMove[x+1] || this.state.scoresByMove[x+1] === 0) {
+                // replace 'X' in scoresByMove
+                var scoresByMoveCopy = scoresByMoveCopy || this.state.scoresByMove.slice();
+                // check if next turn was a strike as well
+                if (this.state.moveHistory[x+1][0] === 10) {
+                  console.log('wow 2 strikes in a row!')
+                  // check if next two turns have been completed
+                  if (scoresByMoveCopy[x+2] || scoresByMoveCopy[x+2] === 0){
+                    var replaceStrikeScore = 10 + this.state.moveHistory[x+1][0] + this.state.moveHistory[x+2][0];
+                    scoresByMoveCopy[x] = replaceStrikeScore;
+                    this.setState({scoresByMove: scoresByMoveCopy});
+                    newScore += (10 + this.state.moveHistory[x + 1][0] + this.state.moveHistory[x + 1][1]);  
+                  } else {
+                    console.log('check back later!')
+                    newScore = 'cannot calculate yet';
+                    // break;
+                  }
+                } else {
+                  var replaceStrikeScore = 10 + this.state.moveHistory[x+1][0] + this.state.moveHistory[x+1][1];
+                  scoresByMoveCopy[x] = replaceStrikeScore;
+                  this.setState({scoresByMove: scoresByMoveCopy});
+                  newScore += (10 + this.state.moveHistory[x + 1][0] + this.state.moveHistory[x + 1][1]);
+                }
               } else {
                 newScore = 'cannot calculate yet';
+                break;
               }
           }
         }
 
+      console.log('oldscore: ', this.state.score, ' || newscore: ', newScore);
       this.setState({score: newScore});
       });        
-
-
-
-
       updatedCurrentFrame = [];
     }
-
-
     // set state of currentFrame
     this.setState({currentFrame: updatedCurrentFrame});
   }
