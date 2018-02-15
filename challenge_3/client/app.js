@@ -128,13 +128,33 @@ class Board extends React.Component {
       originRowIndex--;
       originColumnIndex++;
     }
-
-    console.log(originRowIndex, originColumnIndex);
-
-
   }
 
   checkForSecondDiagonalWin(row, column){
+    var originRowIndex = row;
+    var originColumnIndex = column;
+    var player = this.state.player;
+  
+    while (originRowIndex !== 5) {
+      originRowIndex++;
+      originColumnIndex++;
+    }
+
+    console.log(originRowIndex, originColumnIndex);
+
+    for (var x = 0; x < 3; x++) {
+      var a = this.state.boardState[originRowIndex][originColumnIndex];
+      var b = this.state.boardState[originRowIndex - 1][originColumnIndex - 1];
+      var c = this.state.boardState[originRowIndex - 2][originColumnIndex - 2];
+      var d = this.state.boardState[originRowIndex - 3][originColumnIndex - 3];
+
+      if (((player === a) && (a === b) && (b === c) && (c === d))) {
+        console.log('found winner!')
+      };
+
+      originRowIndex--;
+      originColumnIndex--;
+    }
 
   }
 
@@ -147,6 +167,7 @@ class Board extends React.Component {
         this.setState({boardState: tempBoardState});
         var checkVerticalHorizontalWin = this.checkForVerticalWin(i) || this.checkForHorizontalWin(row);
         this.checkForFirstDiagonalWin(row, i);
+        this.checkForSecondDiagonalWin(row, i);
         this.setState({player: nextPlayer})
         break;
       }
