@@ -24,6 +24,14 @@ var boardState = [
   [-1, -1, -1, -1, -1, -1, -1]
 ]
 
+var togglePlayer = function(player) {
+  if (player === 1) {
+    return 2;
+  } if (player === 2) {
+    return 1;
+  }
+};
+
 class Square extends React.Component {
   render() {
     return (
@@ -58,16 +66,13 @@ class ButtonRow extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={() =>{
-          console.log('inbtn', this);
-          this.props.onClick(0);
-          }}>0</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
+        <button onClick={() =>{this.props.onClick(0)}}>0</button>
+        <button onClick={() =>{this.props.onClick(1)}}>1</button>
+        <button onClick={() =>{this.props.onClick(2)}}>2</button>
+        <button onClick={() =>{this.props.onClick(3)}}>3</button>
+        <button onClick={() =>{this.props.onClick(4)}}>4</button>
+        <button onClick={() =>{this.props.onClick(5)}}>5</button>
+        <button onClick={() =>{this.props.onClick(6)}}>6</button>
       </div>
     );
   }
@@ -77,25 +82,25 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      boardState: this.props.state
+      boardState: this.props.state,
+      player: this.props.player
     };
   }
 
   dropPiece(i) {
-    console.log('inBoard', this);
-    console.log('clicked!', i);
     var tempBoardState = this.state.boardState.slice();
+    var nextPlayer = togglePlayer(this.state.player);
     console.dir(tempBoardState);
     for (var row = 5; row >= 0; row--) {
       console.log(tempBoardState[row][i]);
       if (tempBoardState[row][i] === -1) {
         console.log('found!');
-        tempBoardState[row][i] = 1;
+        tempBoardState[row][i] = this.state.player;
         this.setState({boardState: tempBoardState});
+        this.setState({player: nextPlayer})
         break;
       }
     }
-    console.dir(this.boardState);
   }
 
   render() {
@@ -123,7 +128,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board state={this.props.state}/>
+          <Board state={this.props.state} player={1}/>
         </div>
         <div className="game-info">
           <div></div>
