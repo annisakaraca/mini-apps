@@ -1,19 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// var dropPiece = function(columnIndex) {
-//   console.log('clicked!', columnIndex);
-//   for (var row = 5; row >= 0; row--) {
-//     console.log(boardState[row][columnIndex]);
-//     if (boardState[row][columnIndex] === -1) {
-//       console.log('found!');
-//       boardState[row][columnIndex] = 1;
-//       break;
-//     }
-//   }
-//   console.dir(boardState);
-// }
-
 // state
 var boardState = [
   [-1, -1, -1, -1, -1, -1, -1],
@@ -23,14 +10,6 @@ var boardState = [
   [-1, -1, -1, -1, -1, -1, -1],
   [-1, -1, -1, -1, -1, -1, -1]
 ]
-
-var togglePlayer = function(player) {
-  if (player === 1) {
-    return 2;
-  } if (player === 2) {
-    return 1;
-  }
-};
 
 class Square extends React.Component {
   render() {
@@ -87,16 +66,60 @@ class Board extends React.Component {
     };
   }
 
+  togglePlayer(player) {
+    if (player === 1) {
+      return 2;
+    } if (player === 2) {
+      return 1;
+    }
+  }
+
+  checkForVerticalWin(column) {
+    var player = this.state.player;
+    for (var row = 5; row > 2; row--) {
+      var a = this.state.boardState[row][column];
+      var b = this.state.boardState[row - 1][column];
+      var c = this.state.boardState[row - 2][column];
+      var d = this.state.boardState[row - 3][column];
+
+      if (((player === a) && (a === b) && (b === c) && (c === d))) {
+        console.log('found winner!')
+      }
+    }
+  }
+
+  checkForHorizontalWin(row) {
+    var player = this.state.player;
+    for (var column = 0; column < 8; column++){
+      var a = this.state.boardState[row][column];
+      var b = this.state.boardState[row][column + 1];
+      var c = this.state.boardState[row][column + 2];
+      var d = this.state.boardState[row][column + 3];
+
+      if (((player === a) && (a === b) && (b === c) && (c === d))) {
+        console.log('found winner!')
+      }
+    }
+  }
+
+  
+
+  checkForFirstDiagonalWin(row,column) {
+
+  }
+
+  checkForSecondDiagonalWin(row, column){
+
+  }
+
   dropPiece(i) {
     var tempBoardState = this.state.boardState.slice();
-    var nextPlayer = togglePlayer(this.state.player);
-    console.dir(tempBoardState);
+    var nextPlayer = this.togglePlayer(this.state.player);
     for (var row = 5; row >= 0; row--) {
-      console.log(tempBoardState[row][i]);
       if (tempBoardState[row][i] === -1) {
-        console.log('found!');
         tempBoardState[row][i] = this.state.player;
         this.setState({boardState: tempBoardState});
+        var checkVerticalHorizontalWin = this.checkForVerticalWin(i) || this.checkForHorizontalWin(row);
         this.setState({player: nextPlayer})
         break;
       }
@@ -106,7 +129,7 @@ class Board extends React.Component {
   render() {
     return (
       <div>
-        <ButtonRow onClick={this.dropPiece.bind(this)}/>
+        <ButtonRow togglePlayer={this.togglePlayer} onClick={this.dropPiece.bind(this)}/>
         <table>
           <tbody>
             
@@ -149,5 +172,4 @@ ReactDOM.render(
 
 module.hot.accept();
 
-// console.log('minimal connect four react webpack babel setup');
 
