@@ -45,6 +45,7 @@ class Game extends React.Component {
       newMoveHistory.push(updatedCurrentFrame);
       this.setState({moveHistory: newMoveHistory});
 
+
       // update scoresByMove depending on updatedCurrentFrame
       var updatedScoresByMove = this.state.scoresByMove.slice();
       if (updatedCurrentFrame[0] + updatedCurrentFrame[1] < 10){
@@ -103,14 +104,22 @@ class Game extends React.Component {
               }
           }
         }
-
-      console.log('oldscore: ', this.state.score, ' || newscore: ', newScore);
       this.setState({score: newScore});
       });        
+
       updatedCurrentFrame = [];
       updatedValidButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       updatedinValidButtons = [];
+
+      if (newMoveHistory.length === 10) {
+        console.log('game over');
+        updatedinValidButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        updatedValidButtons = [];
+  
+      };
+
     }
+
     // set state of currentFrame
     this.setState({currentFrame: updatedCurrentFrame});
     this.setState({validButtons: updatedValidButtons});
