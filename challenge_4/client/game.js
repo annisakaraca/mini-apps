@@ -13,7 +13,8 @@ class Game extends React.Component {
       scoresByMove: [],
       moveHistory: [],
       validButtons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      invalidButtons: []
+      invalidButtons: [],
+      gameMessage: ''
     }
   }
 
@@ -110,7 +111,7 @@ class Game extends React.Component {
       updatedinValidButtons = [];
 
       if (newMoveHistory.length === 10) {
-        console.log('game over');
+        this.setState({gameMessage: 'game over'});
         updatedinValidButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         updatedValidButtons = [];
   
@@ -131,6 +132,7 @@ class Game extends React.Component {
         <Keypad valid={this.state.validButtons} invalid={this.state.invalidButtons} bowl={this.bowl.bind(this)}/>
         <Scoreboard score={this.state.score}/>
         <MoveHistory history={this.state.moveHistory} />
+        <h3>{this.state.gameMessage}</h3>
       </div>
     )
   }

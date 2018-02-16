@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "45f12f01beed1c1311da"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "092d85ec6aeeafd6ca8e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -919,6 +919,21 @@ process.umask = function() { return 0; };
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(69);
+} else {
+  module.exports = __webpack_require__(70);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var freeGlobal = __webpack_require__(35);
 
 /** Detect free variable `self`. */
@@ -931,7 +946,7 @@ module.exports = root;
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 /**
@@ -961,21 +976,6 @@ var isArray = Array.isArray;
 
 module.exports = isArray;
 
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(69);
-} else {
-  module.exports = __webpack_require__(70);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 4 */
@@ -1115,7 +1115,7 @@ module.exports = baseGetTag;
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var root = __webpack_require__(1);
+var root = __webpack_require__(2);
 
 /** Built-in value references. */
 var Symbol = root.Symbol;
@@ -1703,7 +1703,7 @@ module.exports = warning;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(4),
-    root = __webpack_require__(1);
+    root = __webpack_require__(2);
 
 /* Built-in method references that are verified to be native. */
 var Map = getNative(root, 'Map');
@@ -1867,7 +1867,7 @@ module.exports = isLength;
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArray = __webpack_require__(2),
+var isArray = __webpack_require__(3),
     isSymbol = __webpack_require__(19);
 
 /** Used to match property names within property paths. */
@@ -2020,7 +2020,7 @@ function supportsProtoAssignment() {
 var baseMatches = __webpack_require__(76),
     baseMatchesProperty = __webpack_require__(135),
     identity = __webpack_require__(29),
-    isArray = __webpack_require__(2),
+    isArray = __webpack_require__(3),
     property = __webpack_require__(145);
 
 /**
@@ -2401,7 +2401,7 @@ module.exports = arrayPush;
 /* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(1),
+/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(2),
     stubFalse = __webpack_require__(123);
 
 /** Detect free variable `exports`. */
@@ -2628,7 +2628,7 @@ module.exports = baseGet;
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArray = __webpack_require__(2),
+var isArray = __webpack_require__(3),
     isKey = __webpack_require__(28),
     stringToPath = __webpack_require__(137),
     toString = __webpack_require__(140);
@@ -3169,7 +3169,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var React = __webpack_require__(3);
+var React = __webpack_require__(1);
 var createProxy = __webpack_require__(72).default;
 var global = __webpack_require__(175);
 
@@ -5707,7 +5707,7 @@ module.exports = isMasked;
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var root = __webpack_require__(1);
+var root = __webpack_require__(2);
 
 /** Used to detect overreaching core-js shims. */
 var coreJsData = root['__core-js_shared__'];
@@ -6063,7 +6063,7 @@ var Stack = __webpack_require__(33),
     equalByTag = __webpack_require__(110),
     equalObjects = __webpack_require__(114),
     getTag = __webpack_require__(129),
-    isArray = __webpack_require__(2),
+    isArray = __webpack_require__(3),
     isBuffer = __webpack_require__(43),
     isTypedArray = __webpack_require__(45);
 
@@ -6339,7 +6339,7 @@ module.exports = equalByTag;
 /* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var root = __webpack_require__(1);
+var root = __webpack_require__(2);
 
 /** Built-in value references. */
 var Uint8Array = root.Uint8Array;
@@ -6517,7 +6517,7 @@ module.exports = getAllKeys;
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayPush = __webpack_require__(42),
-    isArray = __webpack_require__(2);
+    isArray = __webpack_require__(3);
 
 /**
  * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
@@ -6640,7 +6640,7 @@ module.exports = stubArray;
 
 var baseTimes = __webpack_require__(121),
     isArguments = __webpack_require__(25),
-    isArray = __webpack_require__(2),
+    isArray = __webpack_require__(3),
     isBuffer = __webpack_require__(43),
     isIndex = __webpack_require__(26),
     isTypedArray = __webpack_require__(45);
@@ -6996,7 +6996,7 @@ module.exports = getTag;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(4),
-    root = __webpack_require__(1);
+    root = __webpack_require__(2);
 
 /* Built-in method references that are verified to be native. */
 var DataView = getNative(root, 'DataView');
@@ -7009,7 +7009,7 @@ module.exports = DataView;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(4),
-    root = __webpack_require__(1);
+    root = __webpack_require__(2);
 
 /* Built-in method references that are verified to be native. */
 var Promise = getNative(root, 'Promise');
@@ -7022,7 +7022,7 @@ module.exports = Promise;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(4),
-    root = __webpack_require__(1);
+    root = __webpack_require__(2);
 
 /* Built-in method references that are verified to be native. */
 var Set = getNative(root, 'Set');
@@ -7035,7 +7035,7 @@ module.exports = Set;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(4),
-    root = __webpack_require__(1);
+    root = __webpack_require__(2);
 
 /* Built-in method references that are verified to be native. */
 var WeakMap = getNative(root, 'WeakMap');
@@ -7335,7 +7335,7 @@ module.exports = toString;
 
 var Symbol = __webpack_require__(8),
     arrayMap = __webpack_require__(52),
-    isArray = __webpack_require__(2),
+    isArray = __webpack_require__(3),
     isSymbol = __webpack_require__(19);
 
 /** Used as references for various `Number` constants. */
@@ -7437,7 +7437,7 @@ module.exports = baseHasIn;
 
 var castPath = __webpack_require__(51),
     isArguments = __webpack_require__(25),
-    isArray = __webpack_require__(2),
+    isArray = __webpack_require__(3),
     isIndex = __webpack_require__(26),
     isLength = __webpack_require__(27),
     toKey = __webpack_require__(20);
@@ -8659,7 +8659,7 @@ module.exports = baseFlatten;
 
 var Symbol = __webpack_require__(8),
     isArguments = __webpack_require__(25),
-    isArray = __webpack_require__(2);
+    isArray = __webpack_require__(3);
 
 /** Built-in value references. */
 var spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined;
@@ -8933,7 +8933,7 @@ module.exports = win;
 "use strict";
 
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -9012,7 +9012,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(3),l=__webpack_require__(58),B=__webpack_require__(11),C=__webpack_require__(5),ba=__webpack_require__(59),da=__webpack_require__(60),ea=__webpack_require__(61),fa=__webpack_require__(62),ia=__webpack_require__(63),D=__webpack_require__(12);
+var aa=__webpack_require__(1),l=__webpack_require__(58),B=__webpack_require__(11),C=__webpack_require__(5),ba=__webpack_require__(59),da=__webpack_require__(60),ea=__webpack_require__(61),fa=__webpack_require__(62),ia=__webpack_require__(63),D=__webpack_require__(12);
 function E(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:E("227");
 var oa={children:!0,dangerouslySetInnerHTML:!0,defaultValue:!0,defaultChecked:!0,innerHTML:!0,suppressContentEditableWarning:!0,suppressHydrationWarning:!0,style:!0};function pa(a,b){return(a&b)===b}
 var ta={MUST_USE_PROPERTY:1,HAS_BOOLEAN_VALUE:4,HAS_NUMERIC_VALUE:8,HAS_POSITIVE_NUMERIC_VALUE:24,HAS_OVERLOADED_BOOLEAN_VALUE:32,HAS_STRING_BOOLEAN_VALUE:64,injectDOMPropertyConfig:function(a){var b=ta,c=a.Properties||{},d=a.DOMAttributeNamespaces||{},e=a.DOMAttributeNames||{};a=a.DOMMutationMethods||{};for(var f in c){ua.hasOwnProperty(f)?E("48",f):void 0;var g=f.toLowerCase(),h=c[f];g={attributeName:g,attributeNamespace:null,propertyName:f,mutationMethod:null,mustUseProperty:pa(h,b.MUST_USE_PROPERTY),
@@ -9309,7 +9309,7 @@ if (process.env.NODE_ENV !== "production") {
   (function() {
 'use strict';
 
-var React = __webpack_require__(3);
+var React = __webpack_require__(1);
 var invariant = __webpack_require__(21);
 var warning = __webpack_require__(22);
 var ExecutionEnvironment = __webpack_require__(58);
@@ -24860,9 +24860,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = __webpack_require__(3);
+var React = __webpack_require__(1);
 var Keypad = __webpack_require__(187);
 var Scoreboard = __webpack_require__(189);
+var MoveHistory = __webpack_require__(190);
 
 var Game = function (_React$Component) {
   _inherits(Game, _React$Component);
@@ -24876,7 +24877,10 @@ var Game = function (_React$Component) {
       score: 0,
       currentFrame: [],
       scoresByMove: [],
-      moveHistory: []
+      moveHistory: [],
+      validButtons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      invalidButtons: [],
+      gameMessage: ''
     };
     return _this;
   }
@@ -24889,6 +24893,17 @@ var Game = function (_React$Component) {
       // update current frame
       var updatedCurrentFrame = this.state.currentFrame.slice();
       updatedCurrentFrame.push(number);
+
+      // update valid buttons
+      var updatedValidButtons = [];
+      var updatedinValidButtons = [];
+      var largestBtn = 10 - number;
+      for (var a = 0; a <= largestBtn; a++) {
+        updatedValidButtons.push(a);
+      }
+      for (var b = largestBtn + 1; b <= 10; b++) {
+        updatedinValidButtons.push(b);
+      }
 
       // if person gets a strike on the first move, fill in second move
       if (updatedCurrentFrame.length === 1 && updatedCurrentFrame[0] === 10) {
@@ -24927,7 +24942,6 @@ var Game = function (_React$Component) {
                 newScore += 10 + _this2.state.moveHistory[x + 1][0];
               } else {
                 newScore = 'cannot calculate yet';
-                // break;
               }
             } else if (updatedScoresByMove[x] === 'X') {
               if (_this2.state.scoresByMove[x + 1] || _this2.state.scoresByMove[x + 1] === 0) {
@@ -24945,7 +24959,6 @@ var Game = function (_React$Component) {
                   } else {
                     console.log('check back later!');
                     newScore = 'cannot calculate yet';
-                    // break;
                   }
                 } else {
                   var replaceStrikeScore = 10 + _this2.state.moveHistory[x + 1][0] + _this2.state.moveHistory[x + 1][1];
@@ -24959,14 +24972,24 @@ var Game = function (_React$Component) {
               }
             }
           }
-
-          console.log('oldscore: ', _this2.state.score, ' || newscore: ', newScore);
           _this2.setState({ score: newScore });
         });
+
         updatedCurrentFrame = [];
+        updatedValidButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        updatedinValidButtons = [];
+
+        if (newMoveHistory.length === 10) {
+          this.setState({ gameMessage: 'game over' });
+          updatedinValidButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+          updatedValidButtons = [];
+        };
       }
-      // set state of currentFrame
+
+      // set state of currentFrame & buttons
       this.setState({ currentFrame: updatedCurrentFrame });
+      this.setState({ validButtons: updatedValidButtons });
+      this.setState({ invalidButtons: updatedinValidButtons });
     }
   }, {
     key: 'render',
@@ -24974,8 +24997,14 @@ var Game = function (_React$Component) {
       return React.createElement(
         'div',
         null,
-        React.createElement(Scoreboard, null),
-        React.createElement(Keypad, { bowl: this.bowl.bind(this) })
+        React.createElement(Keypad, { valid: this.state.validButtons, invalid: this.state.invalidButtons, bowl: this.bowl.bind(this) }),
+        React.createElement(Scoreboard, { score: this.state.score }),
+        React.createElement(MoveHistory, { history: this.state.moveHistory }),
+        React.createElement(
+          'h3',
+          null,
+          this.state.gameMessage
+        )
       );
     }
   }]);
@@ -24994,27 +25023,42 @@ module.exports = Game;
 
 var KeyPadNumber = __webpack_require__(188);
 
-var React = __webpack_require__(3);
+var React = __webpack_require__(1);
 
 function Keypad(props) {
   return React.createElement(
     'div',
-    null,
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 0 }),
-    React.createElement('br', null),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 1 }),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 2 }),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 3 }),
-    React.createElement('br', null),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 4 }),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 5 }),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 6 }),
-    React.createElement('br', null),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 7 }),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 8 }),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 9 }),
-    React.createElement('br', null),
-    React.createElement(KeyPadNumber, { bowl: props.bowl, number: 10 })
+    { style: {
+        display: 'flex',
+        flexFlow: 'row wrap',
+        width: '90px'
+      } },
+    props.valid.map(function (index) {
+      if (index === 0 || index === 3 || index === 6 || index === 9) {
+        return React.createElement(
+          'div',
+          { style: {
+              display: 'inline-block'
+
+            } },
+          React.createElement(KeyPadNumber, { enabled: true, bowl: props.bowl, number: index }),
+          React.createElement('br', null)
+        );
+      } else {
+        return React.createElement(
+          'div',
+          { style: { display: 'inline-block' } },
+          React.createElement(KeyPadNumber, { enabled: true, bowl: props.bowl, number: index })
+        );
+      }
+    }),
+    props.invalid.map(function (index) {
+      return React.createElement(
+        'div',
+        { style: { display: 'inline-block' } },
+        React.createElement(KeyPadNumber, { enabled: false, bowl: props.bowl, number: index })
+      );
+    })
   );
 }
 
@@ -25027,16 +25071,32 @@ module.exports = Keypad;
 "use strict";
 
 
-var React = __webpack_require__(3);
+var React = __webpack_require__(1);
 
 var keyPadNumber = function keyPadNumber(props) {
-  return React.createElement(
-    'button',
-    { onClick: function onClick() {
-        props.bowl(props.number);
-      } },
-    props.number
-  );
+  if (props.enabled) {
+    return React.createElement(
+      'button',
+      { style: {
+          width: '30px',
+          height: '30px'
+        }, id: props.number, onClick: function onClick() {
+          props.bowl(props.number);
+        } },
+      props.number
+    );
+  } else {
+    return React.createElement(
+      'button',
+      { style: {
+          width: '30px',
+          height: '30px'
+        }, disabled: true, id: props.number, onClick: function onClick() {
+          props.bowl(props.number);
+        } },
+      props.number
+    );
+  }
 };
 
 module.exports = keyPadNumber;
@@ -25048,17 +25108,59 @@ module.exports = keyPadNumber;
 "use strict";
 
 
-var React = __webpack_require__(3);
+var React = __webpack_require__(1);
 
 function Scoreboard(props) {
   return React.createElement(
     'div',
     null,
-    'SCORE:'
+    'SCORE: ',
+    props.score
   );
 }
 
-exports.module = Scoreboard;
+module.exports = Scoreboard;
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var React = __webpack_require__(1);
+
+var moveHistory = function moveHistory(props) {
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h3',
+      null,
+      'Move History'
+    ),
+    React.createElement(
+      'div',
+      { style: {
+          display: 'flex',
+          flexDirection: 'row'
+        } },
+      props.history.map(function (move) {
+        return React.createElement(
+          'div',
+          { style: {
+              margin: '4px'
+            } },
+          move[0],
+          '-',
+          move[1]
+        );
+      })
+    )
+  );
+};
+
+module.exports = moveHistory;
 
 /***/ })
 /******/ ]);
