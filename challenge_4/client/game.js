@@ -1,6 +1,8 @@
 var React = require('react');
 var Keypad = require('./keypad');
 var Scoreboard = require('./scoreboard');
+var MoveHistory = require('./moveHistory');
+
 
 class Game extends React.Component {
   constructor(props) {
@@ -105,6 +107,7 @@ class Game extends React.Component {
       <div>
         <Keypad bowl={this.bowl.bind(this)}/>
         <Scoreboard score={this.state.score}/>
+        <MoveHistory history={this.state.moveHistory} />
       </div>
     )
   }
