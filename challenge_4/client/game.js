@@ -72,7 +72,6 @@ class Game extends React.Component {
               newScore += (10 + this.state.moveHistory[x + 1][0]);
             } else {
               newScore = 'cannot calculate yet';
-              // break;
             }
           } else if (updatedScoresByMove[x] === 'X') {
               if (this.state.scoresByMove[x+1] || this.state.scoresByMove[x+1] === 0) {
@@ -90,7 +89,6 @@ class Game extends React.Component {
                   } else {
                     console.log('check back later!')
                     newScore = 'cannot calculate yet';
-                    // break;
                   }
                 } else {
                   var replaceStrikeScore = 10 + this.state.moveHistory[x+1][0] + this.state.moveHistory[x+1][1];
@@ -120,16 +118,12 @@ class Game extends React.Component {
 
     }
 
-    // set state of currentFrame
+    // set state of currentFrame & buttons
     this.setState({currentFrame: updatedCurrentFrame});
     this.setState({validButtons: updatedValidButtons});
     this.setState({invalidButtons: updatedinValidButtons});
 
   }
-
-
-  //TODO: calculate list of invalid buttons
-
 
   render() {
     return(
