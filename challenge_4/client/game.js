@@ -12,7 +12,8 @@ class Game extends React.Component {
       currentFrame: [],
       scoresByMove: [],
       moveHistory: [],
-      validButtons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      validButtons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      invalidButtons: []
     }
   }
 
@@ -24,9 +25,13 @@ class Game extends React.Component {
 
     // update valid buttons
     var updatedValidButtons = [];
+    var updatedinValidButtons = [];
     var largestBtn = 10 - number;
     for (var a = 0; a <= largestBtn; a++) {
       updatedValidButtons.push(a);
+    }
+    for (var b = largestBtn + 1; b <= 10; b++) {
+      updatedinValidButtons.push(b);
     }
 
     // if person gets a strike on the first move, fill in second move
@@ -104,19 +109,23 @@ class Game extends React.Component {
       });        
       updatedCurrentFrame = [];
       updatedValidButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      updatedinValidButtons = [];
     }
     // set state of currentFrame
     this.setState({currentFrame: updatedCurrentFrame});
     this.setState({validButtons: updatedValidButtons});
+    this.setState({invalidButtons: updatedinValidButtons});
 
   }
 
+
+  //TODO: calculate list of invalid buttons
 
 
   render() {
     return(
       <div>
-        <Keypad valid={this.state.validButtons} bowl={this.bowl.bind(this)}/>
+        <Keypad valid={this.state.validButtons} invalid={this.state.invalidButtons} bowl={this.bowl.bind(this)}/>
         <Scoreboard score={this.state.score}/>
         <MoveHistory history={this.state.moveHistory} />
       </div>

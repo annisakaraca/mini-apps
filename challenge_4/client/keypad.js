@@ -10,6 +10,9 @@ function Keypad(props) {
       {props.valid.map(function(index){
         return <div><KeyPadNumber enabled={true} bowl={props.bowl} number={index} /></div>
       })}
+      {props.invalid.map(function(index){
+        return <div><KeyPadNumber enabled={false} bowl={props.bowl} number={index} /></div>
+      })}
       {/* <KeyPadNumber bowl={props.bowl} number={1} />
       <KeyPadNumber bowl={props.bowl} number={2} />
       <KeyPadNumber bowl={props.bowl} number={3} /><br/>
