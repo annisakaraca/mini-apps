@@ -6,10 +6,17 @@ var React = require('react');
 
 function Keypad(props) {
   return (
-    <div>
+    <div style={{
+      display:'flex',
+      flexFlow: 'row wrap',
+      width: '90px'
+    }}>
       {props.valid.map(function(index){
         if (index === 0 || index === 3 || index === 6 || index === 9) {
-          return <div style={{display: 'inline-block'}}><KeyPadNumber enabled={true} bowl={props.bowl} number={index} /><br/></div>
+          return <div style={{
+            display: 'inline-block'
+            
+          }}><KeyPadNumber enabled={true} bowl={props.bowl} number={index} /><br/></div>
         } else {
           return <div style={{display: 'inline-block'}}><KeyPadNumber enabled={true} bowl={props.bowl} number={index} /></div>
         }
