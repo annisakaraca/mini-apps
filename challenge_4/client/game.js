@@ -11,7 +11,8 @@ class Game extends React.Component {
       score: 0,
       currentFrame: [],
       scoresByMove: [],
-      moveHistory: []
+      moveHistory: [],
+      validButtons: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     }
   }
 
@@ -20,6 +21,13 @@ class Game extends React.Component {
     // update current frame
     var updatedCurrentFrame = this.state.currentFrame.slice();
     updatedCurrentFrame.push(number);
+
+    // update valid buttons
+    var updatedValidButtons = [];
+    var largestBtn = 10 - number;
+    for (var a = 0; a <= largestBtn; a++) {
+      updatedValidButtons.push(a);
+    }
 
     // if person gets a strike on the first move, fill in second move
     if (updatedCurrentFrame.length === 1 && updatedCurrentFrame[0] === 10) {
@@ -95,9 +103,12 @@ class Game extends React.Component {
       this.setState({score: newScore});
       });        
       updatedCurrentFrame = [];
+      updatedValidButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     }
     // set state of currentFrame
     this.setState({currentFrame: updatedCurrentFrame});
+    this.setState({validButtons: updatedValidButtons});
+
   }
 
 
@@ -105,7 +116,7 @@ class Game extends React.Component {
   render() {
     return(
       <div>
-        <Keypad bowl={this.bowl.bind(this)}/>
+        <Keypad valid={this.state.validButtons} bowl={this.bowl.bind(this)}/>
         <Scoreboard score={this.state.score}/>
         <MoveHistory history={this.state.moveHistory} />
       </div>
