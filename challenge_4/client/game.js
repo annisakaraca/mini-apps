@@ -36,7 +36,7 @@ class Game extends React.Component {
     }
 
     // if person gets a strike on the first move, fill in second move
-    if (updatedCurrentFrame.length === 1 && updatedCurrentFrame[0] === 10) {
+    if (updatedCurrentFrame[0] === 10 && this.state.moveHistory.length !== 9) {
       updatedCurrentFrame.push(0);
     }
 
@@ -117,6 +117,13 @@ class Game extends React.Component {
   
       };
 
+
+
+    }
+    // if person gets strike on frame 10
+    if (updatedCurrentFrame[0] === 10 && this.state.moveHistory.length === 9) {
+      updatedValidButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      updatedinValidButtons = [];
     }
 
     // set state of currentFrame & buttons
